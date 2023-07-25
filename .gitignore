@@ -1,4 +1,4 @@
 package-lock.json
-node-modules/
+node_modules/
 reference/
 .DS_Store/
