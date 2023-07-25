@@ -28,6 +28,10 @@ function startPrompts() {
                     value: "addEmployee"
                 },
                 {
+                    name: "Update Employee Role",
+                    value: "updateEmployeeRole"
+                },
+                {
                     name: "View All Roles",
                     value: "viewRoles"
                 },
@@ -44,10 +48,42 @@ function startPrompts() {
                     value: "addDepartment"
                 },
                 {
-                    name: "Update Employee Role",
-                    value: "updateEmployeeRole"
-                },
+                    name: "Quit",
+                    value: "quit"
+                }
             ]
         }
-    ]);
+    ])
+        .then((res) => {
+            let choice = res.choice;
+
+            switch (choice) {
+                case "viewEmployees":
+                    viewEmployees();
+                    break;
+                case "addEmployee":
+                    addEmployee();
+                    break;
+                case "updateEmployeeRole":
+                    updateEmployeeRole();
+                    break;
+                case "viewRoles":
+                    viewRoles();
+                    break;
+                case "addRole":
+                    addRole();
+                    break;
+                case "viewDepartments":
+                    viewDepartments();
+                    break;
+                case "addDepartment":
+                    addDepartment();
+                    break;
+                default:
+                    console.log("Now exiting the Employee Manager, goodbye!");
+                    process.exit();
+            }
+        });
 }
+
+startPrompts();

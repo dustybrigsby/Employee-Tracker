@@ -58,6 +58,7 @@ See [LICENSE](/LICENSE) file in contatining directory
 Used the references and tutorials from:
 
 - Multiple activities from 12-SQL class lessons and files.
+- Multiple activities from 09-NodeJS class lessons and files.
 - [The MySQL Documentation](https://dev.mysql.com/doc/)
 - [Figlet](https://www.npmjs.com/package/figlet): for the splash ASCII text art
 - [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
