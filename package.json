@@ -1,0 +1,24 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "EdX Coding Bootcamp - Module 12 - SQL Challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dustybrigsby/Employee-Tracker.git"
+  },
+  "author": "Dusty Brigsby",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dustybrigsby/Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/dustybrigsby/Employee-Tracker#readme",
+  "dependencies": {
+    "figlet": "^1.6.0",
+    "inquirer": "^8.2.4",
+    "mysql2": "^3.5.2"
+  }
+}
