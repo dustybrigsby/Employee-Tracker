@@ -36,13 +36,13 @@ In the Terminal, navigate to the containing folder and enter "node index.js" to 
 
 Select an option from the menu and follow the prompts to view, update, or remove records.
 
-[Example Video](https://drive.google.com/file/d/1n6D0O3qH-VVzUW7C7tUticXPhDVf2EzZ/view?usp=drive_link)
+EXAMPLE VIDEO TO COME
 
 <a name="screenshot"></a>
 
 ## Screenshot
 
-![Screenshot of running the README generator in the terminal.](/09-NodeJS-Challenge/screenshot.jpg)
+SCREENSHOT TO COME
 
 <a name="license"></a>
 

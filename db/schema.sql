@@ -30,5 +30,5 @@ CREATE TABLE
         role_id INT UNSIGNED NOT NULL,
         FOREIGN KEY (role_id) REFERENCES role (id),
         manager_id INT UNSIGNED,
-        FOREIGN KEY (manager_id) REFERENCES employee (id)
+        FOREIGN KEY (manager_id) REFERENCES employee (id) ON DELETE SET NULL
     );
