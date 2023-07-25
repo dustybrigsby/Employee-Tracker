@@ -86,4 +86,40 @@ function startPrompts() {
         });
 }
 
+// View all employees
+function viewEmployees() {
+
+};
+
+// Add an employee
+function addEmployee() {
+
+};
+
+// Update an employee's role
+function updateEmployeeRole() {
+
+};
+
+// View all roles
+function viewRoles() {
+
+};
+
+// Add a role
+function addRole() {
+
+};
+
+// View all departments
+function viewDepartments() {
+
+};
+
+// Add a department
+function addDepartment() {
+
+};
+
+
 startPrompts();
