@@ -19,14 +19,14 @@ class DB {
     }
 
     // Update an employee's role
-    updateEmployeeRole() {
-        return;
+    updateEmployeeRole(employeeId, roleId) {
+        return this.connection.promise().query("UPDATE employee SET role_id = ? WHERE id = ?", [roleId, employeeId]);
     }
 
     // View all roles
     viewRoles() {
         return this.connection.promise().query(
-            "SELECT role.id, role.title, department.name, role.salary FROM role LEFT JOIN department ON role.department_id = department.id;"
+            "SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department ON role.department_id = department.id;"
         );
     }
 

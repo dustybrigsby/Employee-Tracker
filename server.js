@@ -263,7 +263,7 @@ function addRole() {
             }));
 
             // get new role name, salary and department it belongs to
-            inquirer.prompt(
+            inquirer.prompt([
                 {
                     name: "newRole",
                     message: "What is the name of the new role?"
@@ -278,7 +278,7 @@ function addRole() {
                     message: "Which department does the new role belong to?",
                     choices: departmentOptions
                 }
-            )
+            ])
                 .then((role) => {
                     const newRole = {
                         title: role.newRole,
