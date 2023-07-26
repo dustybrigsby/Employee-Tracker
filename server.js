@@ -1,11 +1,8 @@
 const figlet = require("figlet");
 const inquirer = require("inquirer");
 const db = require("./db");
-const connection = require("./db/connection");
 
 
-
-// Display ascii text art
 function init() {
     console.log("Run splashAscii()");
     figlet("Employee Manager", (err, data) => {
@@ -18,7 +15,6 @@ function init() {
         getUserChoice();
     });
 }
-
 
 
 const choices = [
