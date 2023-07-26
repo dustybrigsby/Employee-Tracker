@@ -36,13 +36,11 @@ In the Terminal, navigate to the containing folder and enter "node index.js" to 
 
 Select an option from the menu and follow the prompts to view, update, or remove records.
 
-EXAMPLE VIDEO TO COME
-
 <a name="screenshot"></a>
 
 ## Screenshot
 
-SCREENSHOT TO COME
+[![Walkthrough Video](./assets/employeeTrackerScreenshot.png)](https://drive.google.com/file/d/1vLsbr-ZuPDwMzLk4tcmpjQ-fDTmcOmeT/view?usp=drive_link)
 
 <a name="license"></a>
 
