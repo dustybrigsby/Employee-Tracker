@@ -110,6 +110,7 @@ function viewEmployees() {
 
 // Add an employee
 function addEmployee() {
+    // get new first and last names
     inquirer.prompt([
         {
             name: "first_name",
@@ -121,15 +122,18 @@ function addEmployee() {
         }
     ])
         .then((res) => {
+            // save names
             const firstName = res.first_name;
             const lastName = res.last_name;
 
+            // get all roles for role prompt options
             db.viewRoles()
                 .then(([roles]) => {
                     const roleOptions = roles.map(({ id, title }) => ({
                         name: title,
                         value: id
                     }));
+                    // get new role
                     inquirer.prompt({
                         type: "list",
                         name: "newRole",
@@ -137,10 +141,13 @@ function addEmployee() {
                         choices: roleOptions
                     })
                         .then((res) => {
+                            // save role
                             let newRole = res.newRole;
 
+                            // get employees for manager prompt options
                             db.viewEmployees()
                                 .then(([managers]) => {
+                                    // save managers as array
                                     const managerOptions = managers.map(({ id, first_name, last_name }) => ({
                                         name: `${first_name} ${last_name}`,
                                         value: id
@@ -148,6 +155,7 @@ function addEmployee() {
 
                                     managerOptions.unshift({ name: "None", value: null });
 
+                                    // get new manager
                                     inquirer.prompt({
                                         type: "list",
                                         name: "newManager",
@@ -155,17 +163,21 @@ function addEmployee() {
                                         choices: managerOptions
                                     })
                                         .then((res) => {
+                                            // compile new employee info
                                             const newEmployee = {
                                                 first_name: firstName,
                                                 last_name: lastName,
                                                 role_id: newRole,
                                                 manager_id: res.newManager
                                             };
-
-                                            // db.function to add employee
-                                            // .then log success
-                                            // .then back to main menu
-                                        });
+                                            // db.function to add new employee to employees_db
+                                            db.addEmployee(newEmployee);
+                                        })
+                                        .then(() => {
+                                            console.log("\n");
+                                            console.log(`${firstName} ${lastName} added to the database.`);
+                                        })
+                                        .then(() => viewEmployees());
                                 });
                         });
                 });

@@ -14,8 +14,8 @@ class DB {
     }
 
     // Add an employee
-    addEmployee() {
-        return;
+    addEmployee(employee) {
+        return this.connection.promise().query("INSERT INTO employee SET ?", employee);
     }
 
     // Update an employee's role
