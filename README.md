@@ -62,7 +62,7 @@ Used the references and tutorials from:
 - [The MySQL Documentation](https://dev.mysql.com/doc/)
 - [Figlet](https://www.npmjs.com/package/figlet): for the splash ASCII text art
 - [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [W3 Schools](https://www.w3schools.com/jsref/default.asp)
+- [W3 Schools](https://www.w3schools.com/mysql/default.asp)
 
 <a name="test"></a>
 

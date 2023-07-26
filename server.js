@@ -9,9 +9,11 @@ function init() {
             console.log("Something went wrong with Figlet...");
             console.dir(err);
             return;
+        } else {
+            console.log(data);
+            console.log("Welcome to Employee Manager!");
+            getUserChoice();
         }
-        console.log("Welcome to Employee Manager!");
-        getUserChoice();
     });
 }
 
@@ -59,12 +61,9 @@ const choices = [
 ];
 
 async function getUserChoice() {
-    // console.log("Run getUserChoice()");
-
     try {
         console.log("Press 'Ctrl + C' any time to quit.\n");
         const choice = await inquirer.prompt(choices);
-        // console.log("choice:", choice.choice);
 
         switch (choice.choice) {
             case "viewEmployees":
@@ -187,11 +186,60 @@ function addEmployee() {
 
 // Update an employee's role
 function updateEmployeeRole() {
-    db.updateEmployeeRole()
-        .then(() => {
+    // get all employees
+    db.viewEmployees()
+        .then(([employees]) => {
+            const employeeOptions = employees.map(({ id, first_name, last_name }) => ({
+                name: `${first_name} ${last_name}`,
+                value: id
+            }));
 
-        })
-        .then(() => getUserChoice());
+            // get employee that user wants to update
+            inquirer.prompt({
+                type: "list",
+                name: "employee",
+                message: "Which employee's role would you like to update?",
+                choices: employeeOptions
+            }
+            )
+                .then((res) => {
+                    // save employee id
+                    const employeeId = res.employee;
+                    let employeeName;
+
+                    // save selected empolyee's name
+                    for (let i = 0; i < employeeOptions.length; i++) {
+                        if (employeeId === employeeOptions[i].value) {
+                            employeeName = employeeOptions[i].name;
+                        }
+                    }
+
+                    // get all roles
+                    db.viewRoles()
+                        .then(([roles]) => {
+                            const roleOptions = roles.map(({ id, title }) => ({
+                                name: title,
+                                value: id
+                            }));
+
+                            // get new role
+                            inquirer.prompt({
+                                type: "list",
+                                name: "roleUpdate",
+                                message: "What role should the employee now have?",
+                                choices: roleOptions
+                            })
+                                // update employee's role in database
+                                .then((res) => {
+                                    db.updateEmployeeRole(employeeId, res.roleUpdate);
+                                })
+                                .then(() => console.log(`${employeeName}'s role updated in the database.`))
+                                .then(() => getUserChoice());
+                        });
+                });
+        });
+
+
 };
 
 // View all roles
