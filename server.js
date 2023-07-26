@@ -4,7 +4,7 @@ const db = require("./db");
 
 
 function init() {
-    console.log("Run splashAscii()");
+    // console.log("Run splashAscii()");
     figlet("Employee Manager", (err, data) => {
         if (err) {
             console.log("Something went wrong with Figlet...");
@@ -60,14 +60,15 @@ const choices = [
 ];
 
 async function getUserChoice() {
-    console.log("Run getUserChoice()");
+    // console.log("Run getUserChoice()");
 
     try {
         const choice = await inquirer.prompt(choices);
-        console.log("choice:", choice);
+        // console.log("choice:", choice.choice);
 
-        switch (choice) {
+        switch (choice.choice) {
             case "viewEmployees":
+                console.log("viewEmployees case");
                 viewEmployees();
                 break;
             case "addEmployee":
@@ -100,7 +101,13 @@ async function getUserChoice() {
 
 // View all employees
 function viewEmployees() {
-
+    db.viewEmployees()
+        .then(([rows]) => {
+            let allEmployees = rows;
+            console.log("\n");
+            console.table(allEmployees);
+        })
+        .then(() => getUserChoice());
 };
 
 // Add an employee
