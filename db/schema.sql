@@ -7,14 +7,14 @@ USE employees_db;
 -- create departments table --
 CREATE TABLE
     department (
-        id INT AUTO_INCREMENT UNSIGNED PRIMARY KEY,
+        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(30) UNIQUE NOT NULL
     );
 
 -- create roles table --
 CREATE TABLE
     role (
-        id INT AUTO_INCREMENT UNSIGNED PRIMARY KEY,
+        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(30) UNIQUE NOT NULL,
         salary DECIMAL UNSIGNED NOT NULL,
         department_id INT UNSIGNED NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE
 -- create employees table --
 CREATE TABLE
     employee (
-        id INT AUTO_INCREMENT UNSIGNED PRIMARY KEY,
+        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         first_name VARCHAR(30) NOT NULL,
         last_name VARCHAR(30) NOT NULL,
         role_id INT UNSIGNED NOT NULL,
