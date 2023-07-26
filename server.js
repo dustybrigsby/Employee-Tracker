@@ -4,14 +4,13 @@ const db = require("./db");
 
 
 function init() {
-    // console.log("Run splashAscii()");
     figlet("Employee Manager", (err, data) => {
         if (err) {
             console.log("Something went wrong with Figlet...");
             console.dir(err);
             return;
         }
-        console.log(data);
+        console.log("Welcome to Employee Manager!");
         getUserChoice();
     });
 }
@@ -63,6 +62,7 @@ async function getUserChoice() {
     // console.log("Run getUserChoice()");
 
     try {
+        console.log("Press 'Ctrl + C' any time to quit.\n");
         const choice = await inquirer.prompt(choices);
         // console.log("choice:", choice.choice);
 
@@ -174,10 +174,9 @@ function addEmployee() {
                                             db.addEmployee(newEmployee);
                                         })
                                         .then(() => {
-                                            console.log("\n");
                                             console.log(`${firstName} ${lastName} added to the database.`);
                                         })
-                                        .then(() => viewEmployees());
+                                        .then(() => getUserChoice());
                                 });
                         });
                 });
@@ -207,11 +206,42 @@ function viewRoles() {
 
 // Add a role
 function addRole() {
-    db.addRole()
-        .then(() => {
+    // get array of all departments
+    db.viewDepartments()
+        .then(([departments]) => {
+            const departmentOptions = departments.map(({ id, name }) => ({
+                name: name,
+                value: id
+            }));
 
-        })
-        .then(() => getUserChoice());
+            // get new role name, salary and department it belongs to
+            inquirer.prompt(
+                {
+                    name: "newRole",
+                    message: "What is the name of the new role?"
+                },
+                {
+                    name: "newSalary",
+                    message: "What is the salary of the new role?"
+                },
+                {
+                    type: "list",
+                    name: "newDepartment",
+                    message: "Which department does the new role belong to?",
+                    choices: departmentOptions
+                }
+            )
+                .then((role) => {
+                    const newRole = {
+                        title: role.newRole,
+                        salary: role.newSalary,
+                        department_id: role.newDepartment
+                    };
+                    db.addRole(newRole)
+                        .then(() => console.log(`\n${newRole} added to the database.`))
+                        .then(() => getUserChoice());
+                });
+        });
 };
 
 // View all departments
@@ -226,13 +256,24 @@ function viewDepartments() {
 
 // Add a department
 function addDepartment() {
-    db.addDepartment()
-        .then(() => {
-
-        })
-        .then(() => getUserChoice());
+    // get new department name
+    inquirer.prompt(
+        {
+            name: "name",
+            message: "What is the name of the new department?"
+        }
+    )
+        .then((res) => {
+            // save name
+            const newDepartment = res;
+            console.log("newDepartment:", newDepartment);
+            db.addDepartment(newDepartment)
+                .then(() => {
+                    console.log(`\n${newDepartment} added to the database.`);
+                })
+                .then(() => getUserChoice());
+        });
 };
-
 
 
 init();

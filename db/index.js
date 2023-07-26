@@ -31,8 +31,8 @@ class DB {
     }
 
     // Add a role
-    addRole() {
-        return;
+    addRole(role) {
+        return this.connection.promise().query("INSERT INTO role SET ?", role);
     }
 
     // View all departments
@@ -43,10 +43,9 @@ class DB {
     }
 
     // Add a department
-    addDepartment() {
-        return;
+    addDepartment(department) {
+        return this.connection.promise().query("INSERT INTO department SET ?", department);
     }
-
 }
 
 module.exports = new DB(connection);
