@@ -173,7 +173,7 @@ function addEmployee() {
                                             db.addEmployee(newEmployee);
                                         })
                                         .then(() => {
-                                            console.log(`${firstName} ${lastName} added to the database.`);
+                                            console.log(`\n${firstName} ${lastName} added to the database.`);
                                         })
                                         .then(() => getUserChoice());
                                 });
@@ -233,7 +233,7 @@ function updateEmployeeRole() {
                                 .then((res) => {
                                     db.updateEmployeeRole(employeeId, res.roleUpdate);
                                 })
-                                .then(() => console.log(`${employeeName}'s role updated in the database.`))
+                                .then(() => console.log(`\n${employeeName}'s role updated in the database.`))
                                 .then(() => getUserChoice());
                         });
                 });
@@ -286,7 +286,7 @@ function addRole() {
                         department_id: role.newDepartment
                     };
                     db.addRole(newRole)
-                        .then(() => console.log(`\n${newRole} added to the database.`))
+                        .then(() => console.log(`\n${newRole.title} added to the database.`))
                         .then(() => getUserChoice());
                 });
         });
