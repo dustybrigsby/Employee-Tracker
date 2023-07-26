@@ -25,7 +25,9 @@ class DB {
 
     // View all roles
     viewRoles() {
-        return;
+        return this.connection.promise().query(
+            "SELECT role.id, role.title, department.name, role.salary FROM role LEFT JOIN department ON role.department_id = department.id;"
+        );
     }
 
     // Add a role
@@ -35,7 +37,9 @@ class DB {
 
     // View all departments
     viewDepartments() {
-        return;
+        return this.connection.promise().query(
+            "SELECT * FROM department;"
+        );
     }
 
     // Add a department

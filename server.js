@@ -68,7 +68,6 @@ async function getUserChoice() {
 
         switch (choice.choice) {
             case "viewEmployees":
-                console.log("viewEmployees case");
                 viewEmployees();
                 break;
             case "addEmployee":
@@ -102,42 +101,124 @@ async function getUserChoice() {
 // View all employees
 function viewEmployees() {
     db.viewEmployees()
-        .then(([rows]) => {
-            let allEmployees = rows;
+        .then(([employees]) => {
             console.log("\n");
-            console.table(allEmployees);
+            console.table(employees);
         })
         .then(() => getUserChoice());
 };
 
 // Add an employee
 function addEmployee() {
+    inquirer.prompt([
+        {
+            name: "first_name",
+            message: "What is the new employee's first name?"
+        },
+        {
+            name: "last_name",
+            message: "What is the new employee's last name?"
+        }
+    ])
+        .then((res) => {
+            const firstName = res.first_name;
+            const lastName = res.last_name;
 
+            db.viewRoles()
+                .then(([roles]) => {
+                    const roleOptions = roles.map(({ id, title }) => ({
+                        name: title,
+                        value: id
+                    }));
+                    inquirer.prompt({
+                        type: "list",
+                        name: "newRole",
+                        message: "What is the new employee's role?",
+                        choices: roleOptions
+                    })
+                        .then((res) => {
+                            let newRole = res.newRole;
+
+                            db.viewEmployees()
+                                .then(([managers]) => {
+                                    const managerOptions = managers.map(({ id, first_name, last_name }) => ({
+                                        name: `${first_name} ${last_name}`,
+                                        value: id
+                                    }));
+
+                                    managerOptions.unshift({ name: "None", value: null });
+
+                                    inquirer.prompt({
+                                        type: "list",
+                                        name: "newManager",
+                                        message: "Who is the new employee's manager?",
+                                        choices: managerOptions
+                                    })
+                                        .then((res) => {
+                                            const newEmployee = {
+                                                first_name: firstName,
+                                                last_name: lastName,
+                                                role_id: newRole,
+                                                manager_id: res.newManager
+                                            };
+
+                                            // db.function to add employee
+                                            // .then log success
+                                            // .then back to main menu
+                                        });
+                                });
+                        });
+                });
+
+
+        });
 };
 
 // Update an employee's role
 function updateEmployeeRole() {
+    db.updateEmployeeRole()
+        .then(() => {
 
+        })
+        .then(() => getUserChoice());
 };
 
 // View all roles
 function viewRoles() {
-
+    db.viewRoles()
+        .then(([roles]) => {
+            console.log("\n");
+            console.table(roles);
+        })
+        .then(() => getUserChoice());
 };
 
 // Add a role
 function addRole() {
+    db.addRole()
+        .then(() => {
 
+        })
+        .then(() => getUserChoice());
 };
 
 // View all departments
 function viewDepartments() {
-
+    db.viewDepartments()
+        .then(([departments]) => {
+            console.log("\n");
+            console.table(departments);
+        })
+        .then(() => getUserChoice());
 };
 
 // Add a department
 function addDepartment() {
+    db.addDepartment()
+        .then(() => {
 
+        })
+        .then(() => getUserChoice());
 };
 
 
